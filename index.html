@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <!-- <link rel="stylesheet" href="css/style.css" /> -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
+        <style>
+            #signup-form {
+                background-color: rgb(146, 197, 241);
+                height: 600px;
+                width: 825px;
+                border-radius: 25px;
+                padding: 5px 40px;
+                box-shadow: 0 10px 25px black;
+                margin-left: 450;
+                margin-right: auto;
+            }
+        </style>
+    <!-- date selecting and age calculating -->
+    <script>
+        $(function () {
+            $("#dob").datepicker({
+                onSelect: function (value, ui) {
+                    var today = new Date(),
+                        age = today.getFullYear() - ui.selectedYear;
+                    $('#age').val(age);
+                },
+                dateFormat: 'dd-mm-yy', changeMonth: true, changeYear: true, yearRange: "c-100:c+0"
+            });
+        });
+    </script>
+</head>
+
+<!-- body designing -->
+
+<body style="background-color: whitesmoke;margin-left: 450px; margin-top: 150px;">
+
+
+    <center>
+    <form style="color: blue;" class="signup-form" id="signup-form">
+        <!-- heading -->
+        <h2 style="color: blue;"><b> REGISTER HERE </h2></br>
+
+        <div>
+            <!-- name  -->
+            <input type="text" id="name" name="name" size="75" style="height: 30px;font-size: medium;"
+                placeholder="NAME"><br>
+            <label for="name" style=" display: none;color: red; font-size: small;" id="errorn1"> *only alphabets</label>
+            <label for="name" style=" display: none; color: red; font-size: small; " id="errorn"> *enter minimum 3
+                characters</label><br>
+
+        </div>
+
+        <div>
+            <!-- email  -->
+            <input type="text" id="email" class="email" name="email" size="75" style="height: 30px;font-size: medium;"
+                placeholder="EMAIL"><br>
+            <label for="email" style="display: none;color: red;font-size: small; " id="erroremail"> * enter valide
+                email</label><br>
+        </div>
+
+
+        <div>
+            <!-- address  -->
+            <input type="text" id="address" name="address" size="75" style="height: 30px;font-size: medium;"
+                placeholder="ADDRESS"><br>
+            <label for="address" style="display: none; color: red;font-size: small;" id="erroradd"> * enter the
+                address</label><br>
+        </div>
+
+
+        <div>
+            <!-- date of birth  -->
+            <input type="text" id="dob" name="dob" size="75" style="height: 30px;font-size: medium;"
+                placeholder="DATE OF BIRTH "><br>
+            <label for="dob" style="display: none; color: red; font-size: smaller;" id="errordob"> * please enter the
+                date</label><br>
+        </div>
+
+
+        <div>
+            <!-- age  -->
+            <input type="text " id="age" name="age" style="height: 30px; width: 370px; font-size: medium; background-color: white;"
+                style="height: 30px;font-size: medium;" placeholder="AGE" disabled>
+            <!-- gender  -->
+            <label for="gender" style="color: blue;"> GENDER :</label>
+            <input type="radio" id="male" name="gender" class="gender">
+            <label for="male" style="color: black;">MALE</label>
+            <input type="radio" id="female" name="gender" class="gender">
+            <label for="female" style="color: black;">FEMALE</label>
+            <input type="radio" id="other" name="gender" class="gender">
+            <label for="other" style="color: black;">OTHER</label><br><br>
+        </div>
+
+
+
+
+        <div>
+            <!-- password  -->
+            <input type="password" id="password" name="password" size="72" style="height: 30px;font-size: medium;"
+                placeholder="PASSWORD">
+            <i class="bi bi-eye-slash" id="togglePassword" size="72"></i><br>
+            <label for="password" style="display: none; color: red; font-size: smaller;" id="errorpass"> * Password must
+                be over 8 characters </label>
+            <label for="password" style="display: none; color: red; font-size: smaller;" id="errorpass2"> * Passwords
+                must be contain one Uppercase </label>
+            <label for="password" style="display: none; color: red; font-size: smaller;" id="errorpass3"> * Password
+                must be contain one lower case</label>
+            <label for="password" style="display: none; color: red; font-size: smaller;" id="errorpass4"> * Password
+                must be contain one special character</label>
+            <label for="password" style="display: none; color: red; font-size: smaller;" id="errorpass4"> * Password
+                must be numbers </label><br>
+        </div>
+
+
+        <div>
+            <!-- confirmpassword -->
+            <input type="password" id="confirmpassword" name="confirmpassword" size="75"
+                style="height: 30px;font-size: medium;" placeholder="CONFIRM PASSWORD"><br>
+            <label style="display:none; color: red; font-size: smaller;" id="errorcon"> * incorrect password</label><br></div><br>
+        </form>
+        <div style="margin-left: 250px;">
+            <!-- button  -->
+            <button type="button" id="bttn" onClick="location='https://www.cybrosys.com/'" style="width: 300px;height: 30px;background-color: blue;color: white;font-size: medium;font-style: unset;" disabled>Register</button>
+        </div>
+    </center>
+    
+    <script>
+        // showing password 
+        const togglePassword = document.querySelector("#togglePassword");
+        const password = document.querySelector("#password");
+
+        togglePassword.addEventListener("click", function () {
+            // toggle the type attribute
+            const type = password.getAttribute("type") === "password" ? "text" : "password";
+            password.setAttribute("type", type);
+
+            //toggle the icon
+            this.classList.toggle("bi-eye");
+        });
+
+        // prevent form submit
+        const form = document.querySelector("form");
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+        });
+    </script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script> -->
+    <!-- <script src="address.js"></script> -->
+    <script src="SCRIPT.js"></script>
+
+
+</body>
+
+</html>
